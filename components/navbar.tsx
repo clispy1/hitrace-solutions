@@ -15,13 +15,13 @@ const menuItems = [
         href: '/telematics',
         subItems: [
           { name: 'Fleet Management', href: '/fleet-management' },
-          { name: 'Fuel Monitoring', href: '#fuel-monitoring' },
-          { name: 'Tracking Solutions', href: '#tracking-solutions' },
-          { name: 'Driver Behavior Monitoring', href: '#driver-behavior' },
-          { name: 'Smart Farming', href: '#smart-farming' },
+          { name: 'Fuel Monitoring', href: '/fuel-monitoring' },
+          { name: 'Tracking Solutions', href: '/tracking-solutions' },
+          { name: 'Driver Behavior Monitoring', href: '/driver-behavior' },
+          { name: 'Smart Farming', href: '/smart-farming' },
         ]
       },
-      { name: 'IoT And Smart Homes', href: '#iot' },
+      { name: 'IoT And Smart Homes', href: '/iot-smart-homes' },
       {
         name: 'Web Services',
         href: '#web-services',
