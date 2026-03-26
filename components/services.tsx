@@ -1,35 +1,40 @@
 'use client';
 import { motion } from 'motion/react';
 import { Truck, MapPin, Home, Globe } from 'lucide-react';
+import { ServiceGraphic } from './service-graphic';
 
 const services = [
   {
     title: "Fleet & Fuel Management",
     description: "Fuel represents a significant cost. Track and manage fuel usage and fleet activities with our cost-effective, dependable solutions.",
     icon: Truck,
-    colSpan: "md:col-span-2 lg:col-span-2",
-    image: "https://picsum.photos/seed/fleet-trucks/800/600"
+    colSpan: "md:col-span-2",
+    image: "https://picsum.photos/seed/fleet-trucks/800/600",
+    type: "fleet"
   },
   {
     title: "Telematics",
     description: "Gain essential insights by obtaining precise, current information on vehicles, assets, and personnel to optimize efficiency.",
     icon: MapPin,
-    colSpan: "md:col-span-1 lg:col-span-1",
-    image: "https://picsum.photos/seed/telematics-map/800/600"
+    colSpan: "md:col-span-1",
+    image: "https://picsum.photos/seed/telematics-map/800/600",
+    type: "telematics"
   },
   {
     title: "IoT & Smart Homes",
     description: "Advanced security systems with real-time monitoring, remote access, and automated alerts to keep your home safe.",
     icon: Home,
-    colSpan: "md:col-span-1 lg:col-span-1",
-    image: "https://picsum.photos/seed/smarthome-iot/800/600"
+    colSpan: "md:col-span-1",
+    image: "https://picsum.photos/seed/smarthome-iot/800/600",
+    type: "iot"
   },
   {
     title: "Web Services",
     description: "Custom web solutions, stunning designs, e-commerce, and expert digital media management to amplify your reach.",
     icon: Globe,
-    colSpan: "md:col-span-2 lg:col-span-2",
-    image: "https://picsum.photos/seed/web-code/800/600"
+    colSpan: "md:col-span-2",
+    image: "https://picsum.photos/seed/web-code/800/600",
+    type: "web"
   }
 ];
 
@@ -47,7 +52,7 @@ export function Services() {
           <p className="text-slate-400 text-lg max-w-2xl">Comprehensive solutions designed to give you complete visibility and control over your operations.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -67,6 +72,9 @@ export function Services() {
               
               {/* Gradient Overlay for Text Readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+
+              {/* Animated Graphic */}
+              <ServiceGraphic type={service.type} />
 
               <div className="relative z-10 p-8 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-blue-900/80 flex items-center justify-center mb-auto border border-white/10 group-hover:border-amber-400/50 transition-colors shadow-lg backdrop-blur-md">
