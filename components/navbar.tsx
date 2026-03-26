@@ -14,7 +14,7 @@ const menuItems = [
         name: 'Telematics',
         href: '/telematics',
         subItems: [
-          { name: 'Fleet Management', href: '#fleet-management' },
+          { name: 'Fleet Management', href: '/fleet-management' },
           { name: 'Fuel Monitoring', href: '#fuel-monitoring' },
           { name: 'Tracking Solutions', href: '#tracking-solutions' },
           { name: 'Driver Behavior Monitoring', href: '#driver-behavior' },
