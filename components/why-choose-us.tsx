@@ -39,8 +39,8 @@ export function WhyChooseUs() {
               transition={{ delay: index * 0.15 }}
               className="flex flex-col items-center text-center p-8 glass-card rounded-3xl group"
             >
-              <div className="w-20 h-20 rounded-full bg-slate-800/50 flex items-center justify-center mb-6 border border-white/5 group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-300 shadow-lg">
-                <reason.icon className="w-10 h-10 text-emerald-400" />
+              <div className="w-20 h-20 rounded-full bg-blue-900/50 flex items-center justify-center mb-6 border border-white/5 group-hover:scale-110 group-hover:border-amber-400/50 transition-all duration-300 shadow-lg">
+                <reason.icon className="w-10 h-10 text-amber-400" />
               </div>
               <h3 className="text-2xl font-display font-bold mb-4 text-white">{reason.title}</h3>
               <p className="text-slate-400 leading-relaxed">{reason.description}</p>

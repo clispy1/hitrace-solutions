@@ -2,6 +2,7 @@
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { MagneticEffect } from './magnetic-effect';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,11 +20,20 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-              <div className="w-4 h-4 border-2 border-slate-950 rounded-sm" />
+          <div className="flex-shrink-0 flex items-center gap-3">
+            {/* CSS representation of the HiTrace H logo */}
+            <div className="flex gap-[2px] h-8 items-center">
+              <div className="w-1.5 h-full bg-amber-400 rounded-sm" />
+              <div className="w-1.5 h-full bg-amber-400 rounded-sm relative">
+                <div className="absolute top-1/2 left-0 w-4 h-1.5 bg-amber-400 -translate-y-1/2" />
+              </div>
+              <div className="w-1.5 h-full bg-amber-400 rounded-sm ml-2.5" />
+              <div className="w-1.5 h-full bg-amber-400 rounded-sm" />
             </div>
-            <span className="font-display font-bold text-2xl tracking-tight">Hitrace</span>
+            <div className="flex flex-col">
+              <span className="font-display font-black text-2xl tracking-wide text-blue-600 leading-none uppercase">Hitrace</span>
+              <span className="font-sans font-semibold text-[0.65rem] tracking-[0.3em] text-blue-600 leading-none mt-1 uppercase">Solutions</span>
+            </div>
           </div>
 
           {/* Desktop Menu */}
@@ -32,7 +42,7 @@ export function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors"
+                className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
               >
                 {link.name}
               </a>
@@ -43,9 +53,11 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-4">
               <span className="text-sm text-slate-400">Call Us: (+233) 20-794-9676</span>
-              <button className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm font-medium transition-colors">
-                Book a Demo
-              </button>
+              <MagneticEffect>
+                <button className="px-5 py-2.5 bg-blue-700 hover:bg-blue-600 text-white rounded-full text-sm font-medium transition-colors shadow-lg shadow-blue-900/20">
+                  Book a Demo
+                </button>
+              </MagneticEffect>
             </div>
             <button
               className="md:hidden p-2 text-slate-300"
@@ -69,14 +81,15 @@ export function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-emerald-400 hover:bg-white/5 rounded-lg"
+                className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-amber-400 hover:bg-white/5 rounded-lg"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 mt-4 border-t border-white/10">
-              <button className="w-full px-5 py-3 bg-emerald-500 text-slate-950 rounded-lg text-base font-semibold">
+            <div className="pt-4 mt-4 border-t border-white/10 flex flex-col gap-4">
+              <span className="text-sm text-slate-400 px-3">Call Us: (+233) 20-794-9676</span>
+              <button className="w-full px-5 py-3 bg-blue-700 text-white rounded-lg text-base font-semibold">
                 Book a Demo
               </button>
             </div>

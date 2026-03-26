@@ -1,16 +1,21 @@
 'use client';
 import { motion } from 'motion/react';
 import { ArrowRight, Play } from 'lucide-react';
+import { HeroScene } from './hero-scene';
+import { MagneticEffect } from './magnetic-effect';
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* 3D Canvas Placeholder / Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950" />
         <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/hitrace-tech/1920/1080?blur=10')] opacity-5 mix-blend-overlay" />
         {/* Grid lines to simulate the 'Omniscient Grid' */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]" />
+        
+        {/* Interactive 3D Scene */}
+        <HeroScene />
       </div>
 
       <div className="container relative z-10 px-4 md:px-6 mx-auto text-center">
@@ -20,14 +25,14 @@ export function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-5xl mx-auto space-y-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-emerald-500/30 text-emerald-400 text-sm font-medium mb-4">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             Next-Gen Fleet & IoT Solutions
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tighter text-white leading-[1.1]">
             OPTIMIZING ALL <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 text-glow">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200 text-glow">
               BUSINESS PROCESSES
             </span>
           </h1>
@@ -37,14 +42,18 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-            <button className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold rounded-full transition-all flex items-center justify-center gap-2 group text-lg">
-              Book a Demo
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="w-full sm:w-auto px-8 py-4 glass hover:bg-white/10 text-white font-medium rounded-full transition-all flex items-center justify-center gap-2 text-lg">
-              <Play className="w-5 h-5" />
-              Read more
-            </button>
+            <MagneticEffect>
+              <button className="w-full sm:w-auto px-8 py-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold rounded-full transition-all flex items-center justify-center gap-2 group text-lg shadow-lg shadow-amber-400/20">
+                Book a Demo
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </MagneticEffect>
+            <MagneticEffect>
+              <button className="w-full sm:w-auto px-8 py-4 glass hover:bg-white/10 text-white font-medium rounded-full transition-all flex items-center justify-center gap-2 text-lg">
+                <Play className="w-5 h-5 text-amber-400" />
+                Read more
+              </button>
+            </MagneticEffect>
           </div>
         </motion.div>
       </div>

@@ -8,28 +8,28 @@ const services = [
     description: "Fuel represents a significant cost. Track and manage fuel usage and fleet activities with our cost-effective, dependable solutions.",
     icon: Truck,
     colSpan: "md:col-span-2 lg:col-span-2",
-    color: "from-emerald-500/20 to-transparent"
+    image: "https://picsum.photos/seed/fleet-trucks/800/600"
   },
   {
     title: "Telematics",
     description: "Gain essential insights by obtaining precise, current information on vehicles, assets, and personnel to optimize efficiency.",
     icon: MapPin,
     colSpan: "md:col-span-1 lg:col-span-1",
-    color: "from-blue-500/20 to-transparent"
+    image: "https://picsum.photos/seed/telematics-map/800/600"
   },
   {
     title: "IoT & Smart Homes",
     description: "Advanced security systems with real-time monitoring, remote access, and automated alerts to keep your home safe.",
     icon: Home,
     colSpan: "md:col-span-1 lg:col-span-1",
-    color: "from-purple-500/20 to-transparent"
+    image: "https://picsum.photos/seed/smarthome-iot/800/600"
   },
   {
     title: "Web Services",
     description: "Custom web solutions, stunning designs, e-commerce, and expert digital media management to amplify your reach.",
     icon: Globe,
     colSpan: "md:col-span-2 lg:col-span-2",
-    color: "from-orange-500/20 to-transparent"
+    image: "https://picsum.photos/seed/web-code/800/600"
   }
 ];
 
@@ -55,15 +55,27 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`glass-card p-8 rounded-3xl relative overflow-hidden group ${service.colSpan}`}
+              className={`glass-card rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col justify-end ${service.colSpan}`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-slate-800/80 flex items-center justify-center mb-6 border border-white/5 group-hover:border-emerald-500/50 transition-colors shadow-lg">
-                  <service.icon className="w-7 h-7 text-emerald-400" />
+              {/* Background Image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src={service.image} 
+                alt={service.title} 
+                className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700"
+              />
+              
+              {/* Gradient Overlay for Text Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+
+              <div className="relative z-10 p-8 flex flex-col h-full">
+                <div className="w-14 h-14 rounded-2xl bg-blue-900/80 flex items-center justify-center mb-auto border border-white/10 group-hover:border-amber-400/50 transition-colors shadow-lg backdrop-blur-md">
+                  <service.icon className="w-7 h-7 text-amber-400" />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-3 text-white">{service.title}</h3>
-                <p className="text-slate-400 leading-relaxed mt-auto">{service.description}</p>
+                <div className="mt-8">
+                  <h3 className="text-2xl font-display font-bold mb-3 text-white group-hover:text-amber-400 transition-colors">{service.title}</h3>
+                  <p className="text-slate-300 leading-relaxed">{service.description}</p>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -6,22 +6,22 @@ const highlights = [
   {
     title: "Perfect fit for any industry",
     description: "The Hitrace fleet management software fits diverse projects, from real-time fleet tracking to full digitalization and business intelligence. We offer customization for local delivery, agriculture, and vehicle leasing.",
-    image: "https://picsum.photos/seed/industry/800/600",
+    image: "https://picsum.photos/seed/industry-logistics/800/600",
   },
   {
     title: "Seamless API integrations",
     description: "Seamlessly transmit processed data to visualization tools and external systems through APIs. Build tailored solutions and integrate with ERP, BI, and accounting systems.",
-    image: "https://picsum.photos/seed/api/800/600",
+    image: "https://picsum.photos/seed/api-code/800/600",
   },
   {
     title: "Hardware-agnostic solution",
     description: "Hitrace integrates with most GPS device models — from small scooter trackers to complex devices with multiple inputs, CAN bus, and OBD support.",
-    image: "https://picsum.photos/seed/hardware/800/600",
+    image: "https://picsum.photos/seed/hardware-gps/800/600",
   },
   {
     title: "Technical consulting & Community",
     description: "Access technical support in five languages, project implementation assistance, and expert-led training. Join the largest network of telematics and IoT experts for knowledge exchange.",
-    image: "https://picsum.photos/seed/community/800/600",
+    image: "https://picsum.photos/seed/community-tech/800/600",
   }
 ];
 
@@ -51,8 +51,8 @@ export function Highlights() {
                 transition={{ duration: 0.6 }}
                 className="flex-1 space-y-6"
               >
-                <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6">
-                  <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+                <div className="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center mb-6 border border-blue-500/20">
+                  <CheckCircle2 className="w-6 h-6 text-amber-400" />
                 </div>
                 <h3 className="text-3xl md:text-4xl font-display font-bold text-white">{item.title}</h3>
                 <p className="text-lg text-slate-400 leading-relaxed">
@@ -61,11 +61,11 @@ export function Highlights() {
                 <ul className="space-y-3 pt-4">
                   {/* Decorative list items to add texture */}
                   <li className="flex items-center gap-3 text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                     Advanced Analytics
                   </li>
                   <li className="flex items-center gap-3 text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                     Real-time Monitoring
                   </li>
                 </ul>
@@ -80,7 +80,7 @@ export function Highlights() {
                 className="flex-1 w-full"
               >
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-card border-white/10 p-2">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-transparent z-10 rounded-3xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-transparent z-10 rounded-3xl pointer-events-none" />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={item.image} 
