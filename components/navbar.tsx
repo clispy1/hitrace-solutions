@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { MagneticEffect } from './magnetic-effect';
 
 const menuItems = [
-  { name: 'Home', href: '#' },
+  { name: 'Home', href: '/' },
   {
     name: 'Services',
     href: '#services',
     subItems: [
       {
         name: 'Telematics',
-        href: '#telematics',
+        href: '/telematics',
         subItems: [
           { name: 'Fleet Management', href: '#fleet-management' },
           { name: 'Fuel Monitoring', href: '#fuel-monitoring' },
