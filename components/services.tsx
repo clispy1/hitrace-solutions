@@ -1,7 +1,15 @@
 'use client';
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Truck, MapPin, Home, Globe } from 'lucide-react';
 import { ServiceGraphic } from './service-graphic';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const services = [
   {
@@ -39,8 +47,37 @@ const services = [
 ];
 
 export function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const cards = gsap.utils.toArray('.service-card');
+    
+    gsap.fromTo(cards, 
+      { 
+        y: 100, 
+        opacity: 0,
+        rotationX: -15,
+        transformPerspective: 1000
+      },
+      {
+        y: 0,
+        opacity: 1,
+        rotationX: 0,
+        stagger: 0.15,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section className="py-24 relative z-20" id="services">
+    <section ref={containerRef} className="py-24 relative z-20" id="services">
       <div className="container px-4 md:px-6 mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -53,14 +90,10 @@ export function Services() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <motion.div
+          {services.map((service) => (
+            <div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`glass-card rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col justify-end ${service.colSpan}`}
+              className={`service-card glass-card rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col justify-end ${service.colSpan}`}
             >
               {/* Background Image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -85,7 +118,7 @@ export function Services() {
                   <p className="text-slate-300 leading-relaxed">{service.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
