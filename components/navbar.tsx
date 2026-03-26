@@ -1,19 +1,170 @@
 'use client';
-import { motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { MagneticEffect } from './magnetic-effect';
 
-export function Navbar() {
+const menuItems = [
+  { name: 'Home', href: '#' },
+  {
+    name: 'Services',
+    href: '#services',
+    subItems: [
+      {
+        name: 'Telematics',
+        href: '#telematics',
+        subItems: [
+          { name: 'Fleet Management', href: '#fleet-management' },
+          { name: 'Fuel Monitoring', href: '#fuel-monitoring' },
+          { name: 'Tracking Solutions', href: '#tracking-solutions' },
+          { name: 'Driver Behavior Monitoring', href: '#driver-behavior' },
+          { name: 'Smart Farming', href: '#smart-farming' },
+        ]
+      },
+      { name: 'IoT And Smart Homes', href: '#iot' },
+      {
+        name: 'Web Services',
+        href: '#web-services',
+        subItems: [
+          { name: 'Custom Web Solutions', href: '#custom-web' },
+          { name: 'E-commerce', href: '#ecommerce' },
+          { name: 'Digital Media', href: '#digital-media' },
+        ]
+      }
+    ]
+  },
+  { name: 'Industries', href: '#industries' },
+  { name: 'Pricing', href: '#pricing' },
+  {
+    name: 'Resources',
+    href: '#resources',
+    subItems: [
+      { name: 'Blog', href: '#blog' },
+      { name: 'Case Studies', href: '#case-studies' },
+      { name: 'FAQs', href: '#faqs' },
+    ]
+  },
+];
+
+function DesktopSubNavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = [
-    { name: 'Home', href: '#' },
-    { name: 'Services', href: '#services' },
-    { name: 'Industries', href: '#industries' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Resources', href: '#resources' },
-  ];
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <a href={item.href} className="flex items-center justify-between px-4 py-3 text-sm text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">
+        {item.name}
+        {item.subItems && <ChevronRight className="w-4 h-4 ml-2" />}
+      </a>
+
+      <AnimatePresence>
+        {isOpen && item.subItems && (
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-0 left-full ml-1 w-64 glass border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50 flex flex-col py-2"
+          >
+            {item.subItems.map((nestedItem: any) => (
+              <a key={nestedItem.name} href={nestedItem.href} className="block px-4 py-3 text-sm text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">
+                {nestedItem.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function DesktopNavItem({ item }: { item: any }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!item.subItems) {
+    return (
+      <a href={item.href} className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors py-2">
+        {item.name}
+      </a>
+    );
+  }
+
+  return (
+    <div
+      className="relative group"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <a href={item.href} className="flex items-center gap-1 text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors py-2">
+        {item.name}
+        <ChevronDown className="w-4 h-4" />
+      </a>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, rotateX: -10 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            exit={{ opacity: 0, y: 10, rotateX: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 mt-2 w-64 glass border border-white/10 rounded-2xl overflow-visible shadow-2xl z-50 flex flex-col py-2"
+            style={{ perspective: 1000 }}
+          >
+            {item.subItems.map((subItem: any) => (
+              <DesktopSubNavItem key={subItem.name} item={subItem} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function MobileNavItem({ item, depth = 0 }: { item: any, depth?: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!item.subItems) {
+    return (
+      <a href={item.href} className={`block py-3 text-base font-medium text-slate-300 hover:text-amber-400 transition-colors ${depth > 0 ? 'pl-4 border-l border-white/10' : ''}`}>
+        {item.name}
+      </a>
+    );
+  }
+
+  return (
+    <div className="flex flex-col">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center justify-between py-3 text-base font-medium text-slate-300 hover:text-amber-400 transition-colors ${depth > 0 ? 'pl-4 border-l border-white/10' : ''}`}
+      >
+        {item.name}
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
+          <ChevronDown className="w-5 h-5" />
+        </motion.div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden flex flex-col ml-4"
+          >
+            {item.subItems.map((subItem: any) => (
+              <MobileNavItem key={subItem.name} item={subItem} depth={depth + 1} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b-0 border-white/5">
@@ -38,14 +189,8 @@ export function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
-              >
-                {link.name}
-              </a>
+            {menuItems.map((link) => (
+              <DesktopNavItem key={link.name} item={link} />
             ))}
           </div>
 
@@ -70,32 +215,28 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden glass border-t border-white/10"
-        >
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-amber-400 hover:bg-white/5 rounded-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-4 mt-4 border-t border-white/10 flex flex-col gap-4">
-              <span className="text-sm text-slate-400 px-3">Call Us: (+233) 20-794-9676</span>
-              <button className="w-full px-5 py-3 bg-blue-700 text-white rounded-lg text-base font-semibold">
-                Book a Demo
-              </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden glass border-t border-white/10 max-h-[calc(100vh-5rem)] overflow-y-auto"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {menuItems.map((link) => (
+                <MobileNavItem key={link.name} item={link} />
+              ))}
+              <div className="pt-4 mt-4 border-t border-white/10 flex flex-col gap-4">
+                <span className="text-sm text-slate-400 px-3">Call Us: (+233) 20-794-9676</span>
+                <button className="w-full px-5 py-3 bg-blue-700 text-white rounded-lg text-base font-semibold">
+                  Book a Demo
+                </button>
+              </div>
             </div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
