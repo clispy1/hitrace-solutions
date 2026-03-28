@@ -34,8 +34,8 @@ const menuItems = [
       { name: 'White Label Platform', href: '/white-label' }
     ]
   },
-  { name: 'Industries', href: '#industries' },
-  { name: 'Pricing', href: '#pricing' },
+  { name: 'Industries', href: '/industries' },
+  { name: 'Pricing', href: '/pricing' },
   {
     name: 'Resources',
     href: '#resources',
