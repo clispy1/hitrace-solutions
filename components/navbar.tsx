@@ -24,13 +24,14 @@ const menuItems = [
       { name: 'IoT And Smart Homes', href: '/iot-smart-homes' },
       {
         name: 'Web Services',
-        href: '#web-services',
+        href: '/web-services',
         subItems: [
-          { name: 'Custom Web Solutions', href: '#custom-web' },
-          { name: 'E-commerce', href: '#ecommerce' },
-          { name: 'Digital Media', href: '#digital-media' },
+          { name: 'Custom Web Solutions', href: '/web-services' },
+          { name: 'E-commerce', href: '/web-services' },
+          { name: 'API Development', href: '/web-services' },
         ]
-      }
+      },
+      { name: 'White Label Platform', href: '/white-label' }
     ]
   },
   { name: 'Industries', href: '#industries' },

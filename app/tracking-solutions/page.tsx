@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   MapPin, Box, Truck, Route, AlertTriangle, 
   BarChart, Smartphone, Settings, Cloud, Eye, 
@@ -11,9 +12,9 @@ import {
 } from 'lucide-react';
 
 const whatWeTrack = [
-  { icon: Truck, title: "Vehicle Tracking", desc: "Live location, speed, route history, fuel usage, and driver behavior analytics." },
-  { icon: Box, title: "Asset Tracking", desc: "Monitor valuable equipment or goods in transit with geo-fencing and movement alerts." },
-  { icon: Settings, title: "Fleet Management", desc: "Full platform for dispatch, maintenance alerts, and analytics reporting." },
+  { icon: Truck, title: "Vehicle Tracking", desc: "Live location, speed, route history, fuel usage, and driver behavior analytics.", image: "https://picsum.photos/seed/vehicle-track/600/400" },
+  { icon: Box, title: "Asset Tracking", desc: "Monitor valuable equipment or goods in transit with geo-fencing and movement alerts.", image: "https://picsum.photos/seed/asset-track/600/400" },
+  { icon: Settings, title: "Fleet Management", desc: "Full platform for dispatch, maintenance alerts, and analytics reporting.", image: "https://picsum.photos/seed/fleet-track/600/400" },
 ];
 
 const features = [
@@ -50,7 +51,8 @@ const benefits = [
 
 export default function TrackingSolutionsPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="blue" />
       <Navbar />
 
       {/* Hero Section */}
@@ -107,13 +109,24 @@ export default function TrackingSolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-8 border-white/10 text-center group hover:border-blue-500/30 transition-colors"
+                className="glass-card rounded-3xl overflow-hidden border-white/10 text-center group hover:border-blue-500/30 transition-colors flex flex-col"
               >
-                <div className="w-16 h-16 rounded-full bg-blue-900/30 flex items-center justify-center mx-auto mb-6 border border-blue-500/20 group-hover:bg-blue-600/20 transition-colors">
-                  <item.icon className="w-8 h-8 text-blue-400" />
+                <div className="h-48 w-full relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-3 text-white">{item.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+                <div className="p-8 pt-0 relative z-10 flex-1 flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center mx-auto mb-6 border border-blue-500/30 group-hover:bg-blue-900/40 transition-colors -mt-8 relative z-20 shadow-xl shadow-blue-900/20">
+                    <item.icon className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold mb-3 text-white">{item.title}</h3>
+                  <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>

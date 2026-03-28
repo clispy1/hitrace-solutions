@@ -6,6 +6,7 @@ import { ServiceGraphic } from './service-graphic';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Link from 'next/link';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,7 +19,8 @@ const services = [
     icon: Truck,
     colSpan: "md:col-span-2",
     image: "https://picsum.photos/seed/fleet-trucks/800/600",
-    type: "fleet"
+    type: "fleet",
+    href: "/fleet-management"
   },
   {
     title: "Telematics",
@@ -26,7 +28,8 @@ const services = [
     icon: MapPin,
     colSpan: "md:col-span-1",
     image: "https://picsum.photos/seed/telematics-map/800/600",
-    type: "telematics"
+    type: "telematics",
+    href: "/telematics"
   },
   {
     title: "IoT & Smart Homes",
@@ -34,7 +37,8 @@ const services = [
     icon: Home,
     colSpan: "md:col-span-1",
     image: "https://picsum.photos/seed/smarthome-iot/800/600",
-    type: "iot"
+    type: "iot",
+    href: "/iot-smart-homes"
   },
   {
     title: "Web Services",
@@ -42,7 +46,8 @@ const services = [
     icon: Globe,
     colSpan: "md:col-span-2",
     image: "https://picsum.photos/seed/web-code/800/600",
-    type: "web"
+    type: "web",
+    href: "/web-services"
   }
 ];
 
@@ -91,9 +96,10 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service) => (
-            <div
+            <Link
+              href={service.href}
               key={service.title}
-              className={`service-card glass-card rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col justify-end ${service.colSpan}`}
+              className={`service-card glass-card rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col justify-end block ${service.colSpan}`}
             >
               {/* Background Image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -118,7 +124,7 @@ export function Services() {
                   <p className="text-slate-300 leading-relaxed">{service.description}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

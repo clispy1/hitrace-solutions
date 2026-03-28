@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   Activity, Fuel, ShieldAlert, Wrench, 
   Users, Settings, ArrowRight, Car 
@@ -18,7 +19,8 @@ const benefits = [
 
 export default function DriverBehaviorPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="orange" />
       <Navbar />
 
       {/* Hero Section */}
@@ -64,7 +66,7 @@ export default function DriverBehaviorPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Why Monitor Driver Behavior?</h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Transform your fleet's safety and efficiency.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Transform your fleet&apos;s safety and efficiency.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -106,14 +108,18 @@ export default function DriverBehaviorPage() {
                       <Settings className="w-4 h-4" /> Custom Parameters
                     </div>
                     <h3 className="text-3xl font-display font-bold text-white mb-6">Features of the Hitrace Driver Behavior Monitoring</h3>
-                    <p className="text-lg text-slate-300 leading-relaxed">
+                    <p className="text-lg text-slate-300 leading-relaxed mb-8">
                       The ability to choose parameters for analyzing driving behavior includes acceleration, braking, speeding, reckless driving, and acceleration during cornering. The system can monitor additional violations based on the sensors that are set up.
                     </p>
                   </div>
-                  <div className="w-full md:w-1/3 flex justify-center">
-                    <div className="w-48 h-48 rounded-full border-4 border-dashed border-orange-500/30 flex items-center justify-center relative animate-[spin_20s_linear_infinite]">
-                      <div className="absolute inset-0 bg-orange-500/10 rounded-full blur-xl" />
-                      <Car className="w-16 h-16 text-orange-400 animate-[spin_20s_linear_infinite_reverse]" />
+                  <div className="w-full md:w-1/2 relative">
+                    <div className="aspect-video rounded-2xl overflow-hidden border border-orange-500/20 shadow-2xl">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src="https://picsum.photos/seed/driver-features/800/600" 
+                        alt="Driver Behavior Features" 
+                        className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" 
+                      />
                     </div>
                   </div>
                 </div>
@@ -135,7 +141,7 @@ export default function DriverBehaviorPage() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Ready to improve your fleet's safety?</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Ready to improve your fleet&apos;s safety?</h2>
             <p className="text-xl text-orange-100/80 mb-10">
               Start monitoring driver behavior today and see an immediate impact on your bottom line.
             </p>

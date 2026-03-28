@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   Fuel, ShieldCheck, TrendingUp, Activity, 
   Map, Clock, Database, CheckCircle2, 
@@ -25,13 +26,14 @@ const supports = [
 
 const components = [
   { icon: Droplet, title: "Fuel level sensor", desc: "Monitors the fuel level and its fluctuations in the tank. It interfaces with the GPS tracking device through a digital output. This is currently the most efficient method." },
-  { icon: Cpu, title: "Fuel consumption sensor", desc: "Monitors the amount of fuel flowing through a vehicle's fuel line. The live data is sent directly to the GPS tracking device. Widely used in rail, air, and maritime." },
-  { icon: Car, title: "CAN bus", desc: "Transmits live fuel level information from the vehicle's onboard computer to the satellite monitoring system. Simple to install and maintain." },
+  { icon: Cpu, title: "Fuel consumption sensor", desc: "Monitors the amount of fuel flowing through a vehicle&apos;s fuel line. The live data is sent directly to the GPS tracking device. Widely used in rail, air, and maritime." },
+  { icon: Car, title: "CAN bus", desc: "Transmits live fuel level information from the vehicle&apos;s onboard computer to the satellite monitoring system. Simple to install and maintain." },
 ];
 
 export default function FuelMonitoringPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="green" />
       <Navbar />
 
       {/* Hero Section */}
@@ -125,11 +127,19 @@ export default function FuelMonitoringPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative h-full"
             >
-              <div className="aspect-square rounded-3xl overflow-hidden glass-card border-white/10 p-8 shadow-2xl shadow-green-900/20 flex flex-col justify-center text-center relative">
+              <div className="h-full rounded-3xl overflow-hidden glass-card border-white/10 shadow-2xl shadow-green-900/20 flex flex-col relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-green-600/10 to-transparent z-0" />
-                <div className="relative z-10">
+                <div className="h-1/2 relative z-10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src="https://picsum.photos/seed/fuel-features/800/600" 
+                    alt="Fuel Monitoring Features" 
+                    className="w-full h-full object-cover opacity-80" 
+                  />
+                </div>
+                <div className="p-8 relative z-10 flex-1 flex flex-col justify-center text-center">
                   <h3 className="text-2xl font-display font-bold text-white mb-4">Features of our fuel monitoring system</h3>
                   <p className="text-lg text-slate-300 leading-relaxed">
                     The fleet fuel monitoring system offers details on fuel refills and withdrawals, including exact date, time, location, starting and ending fuel levels, and volume. The mobile app enables your clients to access this information while on the move.

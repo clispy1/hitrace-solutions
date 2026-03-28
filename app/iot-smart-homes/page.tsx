@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   Lightbulb, Smartphone, Zap, Shield, Settings, 
   Cloud, Mic, Repeat, CheckCircle2, Quote, ArrowRight, Home 
@@ -33,7 +34,8 @@ const reasons = [
 
 export default function IoTSmartHomesPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="blue" />
       <Navbar />
 
       {/* Hero Section */}
@@ -161,7 +163,17 @@ export default function IoTSmartHomesPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
+              className="flex flex-col gap-6"
             >
+              <div className="aspect-video rounded-3xl overflow-hidden glass-card border-white/10 shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="https://picsum.photos/seed/smart-home-interior/800/600" 
+                  alt="Smart Home Interior" 
+                  className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" 
+                />
+              </div>
+
               <div className="glass-card rounded-3xl p-8 md:p-12 border-blue-500/20 shadow-[0_0_40px_-10px_rgba(37,99,235,0.15)] relative overflow-hidden">
                 <Quote className="absolute top-6 left-6 w-20 h-20 text-white/5 rotate-180 pointer-events-none" />
                 <div className="relative z-10">

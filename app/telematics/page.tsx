@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   MapPin, Wrench, ShieldAlert, Fuel, History, 
   BarChart, Video, Map, Settings, Wifi, 
@@ -76,7 +77,8 @@ export default function TelematicsPage() {
   }, { scope: stepsContainerRef });
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="blue" />
       <Navbar />
 
       {/* Hero Section */}

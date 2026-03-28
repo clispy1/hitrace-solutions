@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   Tractor, Database, Calculator, Network, 
   Map, List, CheckSquare, FileText, 
@@ -26,7 +27,8 @@ const steps = [
 
 export default function SmartFarmingPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="emerald" />
       <Navbar />
 
       {/* Hero Section */}
@@ -136,12 +138,20 @@ export default function SmartFarmingPage() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="rounded-3xl overflow-hidden glass-card border-emerald-500/20 p-10 md:p-16 shadow-2xl shadow-emerald-900/20 relative text-center">
+              <div className="rounded-3xl overflow-hidden glass-card border-emerald-500/20 shadow-2xl shadow-emerald-900/20 relative flex flex-col md:flex-row items-center">
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/10 to-transparent z-0" />
-                <div className="relative z-10">
-                  <Sprout className="w-16 h-16 text-emerald-400 mx-auto mb-6" />
+                <div className="w-full md:w-1/2 relative z-10 h-64 md:h-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src="https://picsum.photos/seed/smart-farming-features/800/600" 
+                    alt="Agricultural GPS System" 
+                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" 
+                  />
+                </div>
+                <div className="w-full md:w-1/2 p-10 md:p-16 relative z-10 text-left">
+                  <Sprout className="w-16 h-16 text-emerald-400 mb-6" />
                   <h3 className="text-3xl font-display font-bold text-white mb-6">Features of the Hitrace agricultural GPS system</h3>
-                  <p className="text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-xl text-slate-300 leading-relaxed">
                     Importing and creating fields. Management of crop rotation, a catalog of crops, and a comprehensive history of cultivation for each field.
                   </p>
                 </div>

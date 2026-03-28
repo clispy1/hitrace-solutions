@@ -72,10 +72,18 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">What We Do</h4>
             <ul className="space-y-4">
-              {['Fleet Management', 'Tracking Solutions', 'Fuel Monitoring', 'IoT and Smart Homes', 'Web Services', 'API Integration'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
-                    {link}
+              {[
+                { name: 'Fleet Management', href: '/fleet-management' },
+                { name: 'Tracking Solutions', href: '/tracking-solutions' },
+                { name: 'Fuel Monitoring', href: '/fuel-monitoring' },
+                { name: 'IoT and Smart Homes', href: '/iot-smart-homes' },
+                { name: 'Web Services', href: '/web-services' },
+                { name: 'Driver Behavior', href: '/driver-behavior' },
+                { name: 'White Label', href: '/white-label' }
+              ].map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
+                    {link.name}
                   </a>
                 </li>
               ))}

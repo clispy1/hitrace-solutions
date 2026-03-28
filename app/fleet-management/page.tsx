@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
+import { AnimatedBackground } from '@/components/animated-background';
 import { 
   Users, Clock, ShieldAlert, TrendingDown, 
   ListChecks, CalendarClock, PlusCircle, FileBarChart,
@@ -27,7 +28,7 @@ const benefits = [
   {
     icon: Clock,
     title: "Respond promptly",
-    desc: "Evaluate the fleet's condition—overdue services, financial aspects, and time usage. These factors can be enhanced through timely responses."
+    desc: "Evaluate the fleet&apos;s condition—overdue services, financial aspects, and time usage. These factors can be enhanced through timely responses."
   },
   {
     icon: ShieldAlert,
@@ -70,7 +71,8 @@ export default function FleetManagementPage() {
   }, { scope: cardsRef });
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
+      <AnimatedBackground color="blue" />
       <Navbar />
 
       {/* Hero Section */}
@@ -116,7 +118,7 @@ export default function FleetManagementPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Why Choose Hitrace?</h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Take full control of your fleet's health and operational expenses.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Take full control of your fleet&apos;s health and operational expenses.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
@@ -194,14 +196,26 @@ export default function FleetManagementPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card rounded-3xl p-8 md:p-16 border-amber-400/20 shadow-[0_0_50px_-12px_rgba(251,191,36,0.15)] max-w-5xl mx-auto text-center relative overflow-hidden"
+            className="glass-card rounded-3xl p-8 md:p-16 border-amber-400/20 shadow-[0_0_50px_-12px_rgba(251,191,36,0.15)] max-w-6xl mx-auto relative overflow-hidden flex flex-col md:flex-row items-center gap-10"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/10 blur-[100px] rounded-full pointer-events-none" />
-            <Database className="w-16 h-16 text-amber-400 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">Capabilities of the System</h2>
-            <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
-              Availability of comprehensive data regarding <strong className="text-white font-semibold">mileage</strong>, <strong className="text-white font-semibold">engine hours</strong>, <strong className="text-white font-semibold">services</strong>, and detailed information for each individual vehicle in your fleet.
-            </p>
+            <div className="flex-1 text-center md:text-left relative z-10">
+              <Database className="w-16 h-16 text-amber-400 mx-auto md:mx-0 mb-6" />
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">Capabilities of the System</h2>
+              <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
+                Availability of comprehensive data regarding <strong className="text-white font-semibold">mileage</strong>, <strong className="text-white font-semibold">engine hours</strong>, <strong className="text-white font-semibold">services</strong>, and detailed information for each individual vehicle in your fleet.
+              </p>
+            </div>
+            <div className="w-full md:w-1/2 relative z-10">
+              <div className="aspect-video rounded-2xl overflow-hidden border border-amber-400/20 shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="https://picsum.photos/seed/fleet-capabilities/800/600" 
+                  alt="System Capabilities" 
+                  className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" 
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -220,7 +234,7 @@ export default function FleetManagementPage() {
           >
             <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">Ready to Lower Operational Costs?</h2>
             <p className="text-xl text-blue-200 mb-10">
-              Implement Hitrace's fleet maintenance management system today.
+              Implement Hitrace&apos;s fleet maintenance management system today.
             </p>
             <MagneticEffect>
               <button className="inline-flex items-center gap-2 px-8 py-4 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-full text-lg font-bold transition-colors shadow-[0_0_30px_-5px_rgba(251,191,36,0.4)]">
