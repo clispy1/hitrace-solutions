@@ -1,14 +1,23 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   Lightbulb, Smartphone, Zap, Shield, Settings, 
   Cloud, Mic, Repeat, CheckCircle2, Quote, ArrowRight, Home 
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const offers = [
   { icon: Lightbulb, title: "Smart Automation", desc: "Schedule lighting, climate, and appliances to suit your lifestyle." },
@@ -33,6 +42,43 @@ const reasons = [
 ];
 
 export default function IoTSmartHomesPage() {
+  const offersRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const offerCards = gsap.utils.toArray('.offer-card');
+    gsap.fromTo(offerCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: offersRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    const stepCards = gsap.utils.toArray('.step-card');
+    gsap.fromTo(stepCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: offersRef });
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
       <AnimatedBackground color="blue" />
@@ -77,7 +123,7 @@ export default function IoTSmartHomesPage() {
       </section>
 
       {/* What We Offer */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={offersRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What We Offer</h2>
@@ -92,7 +138,7 @@ export default function IoTSmartHomesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-8 border-white/10 hover:border-blue-500/30 transition-colors group"
+                className="offer-card glass-card rounded-3xl p-8 border-white/10 hover:border-blue-500/30 transition-colors group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-blue-900/50 flex items-center justify-center mb-6 border border-blue-500/20 group-hover:bg-blue-600/20 transition-colors">
                   <offer.icon className="w-7 h-7 text-blue-400 group-hover:text-blue-300 transition-colors" />
@@ -106,7 +152,7 @@ export default function IoTSmartHomesPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 relative z-10 bg-slate-900/30">
+      <section className="py-24 relative z-10 bg-slate-900/30" ref={stepsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">How It Works</h2>
@@ -122,7 +168,7 @@ export default function IoTSmartHomesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center"
+                className="step-card relative z-10 flex flex-col items-center text-center"
               >
                 <div className="w-24 h-24 rounded-full bg-slate-950 flex items-center justify-center border-2 border-blue-500/30 mb-6 shadow-xl shadow-blue-900/20">
                   <step.icon className="w-10 h-10 text-blue-400" />
@@ -199,8 +245,9 @@ export default function IoTSmartHomesPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-blue-900/20" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/30 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div

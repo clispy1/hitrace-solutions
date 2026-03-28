@@ -8,6 +8,7 @@ import { Highlights } from '@/components/highlights';
 import { WhyChooseUs } from '@/components/why-choose-us';
 import { Footer } from '@/components/footer';
 import { AnimatedBackground } from '@/components/animated-background';
+import { CtaSection } from '@/components/cta-section';
 
 export default function Home() {
   return (
@@ -21,6 +22,9 @@ export default function Home() {
       <VideoSection />
       <Highlights />
       <WhyChooseUs />
+      
+      <CtaSection />
+
       <Footer />
     </main>
   );

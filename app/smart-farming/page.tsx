@@ -1,15 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   Tractor, Database, Calculator, Network, 
   Map, List, CheckSquare, FileText, 
   ArrowRight, Sprout 
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const benefits = [
   { icon: Tractor, title: "Management of specialized vehicles", desc: "Clients receive precise information regarding the quality and quantity of field operations, along with details about the activities of agricultural vehicles and their operators." },
@@ -26,6 +35,43 @@ const steps = [
 ];
 
 export default function SmartFarmingPage() {
+  const benefitsRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const benefitCards = gsap.utils.toArray('.benefit-card');
+    gsap.fromTo(benefitCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: benefitsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    const stepCards = gsap.utils.toArray('.step-card');
+    gsap.fromTo(stepCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: benefitsRef });
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
       <AnimatedBackground color="emerald" />
@@ -70,7 +116,7 @@ export default function SmartFarmingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={benefitsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Why Choose Hitrace for Agriculture?</h2>
@@ -85,7 +131,7 @@ export default function SmartFarmingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-8 border-white/10 hover:border-emerald-500/30 transition-colors group"
+                className="benefit-card glass-card rounded-3xl p-8 border-white/10 hover:border-emerald-500/30 transition-colors group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-emerald-900/30 flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors">
                   <benefit.icon className="w-7 h-7 text-emerald-400 group-hover:text-emerald-300 transition-colors" />
@@ -99,7 +145,7 @@ export default function SmartFarmingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 relative z-10 bg-slate-900/30">
+      <section className="py-24 relative z-10 bg-slate-900/30" ref={stepsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">How It Works</h2>
@@ -115,7 +161,7 @@ export default function SmartFarmingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center"
+                className="step-card relative z-10 flex flex-col items-center text-center"
               >
                 <div className="w-24 h-24 rounded-full bg-slate-950 flex items-center justify-center border-2 border-emerald-500/30 mb-6 shadow-xl shadow-emerald-900/20">
                   <step.icon className="w-10 h-10 text-emerald-400" />
@@ -163,7 +209,8 @@ export default function SmartFarmingPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-emerald-900/10" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">

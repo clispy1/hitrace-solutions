@@ -1,14 +1,23 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   Activity, Fuel, ShieldAlert, Wrench, 
   Users, Settings, ArrowRight, Car 
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const benefits = [
   { icon: Fuel, title: "Reduction in fuel consumption", desc: "This solution complements the Hitrace fuel monitoring system. By minimizing aggressive driving maneuvers and optimizing vehicle speed, it leads to lower fuel costs and consumption." },
@@ -18,6 +27,26 @@ const benefits = [
 ];
 
 export default function DriverBehaviorPage() {
+  const benefitsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const benefitCards = gsap.utils.toArray('.benefit-card');
+    gsap.fromTo(benefitCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: benefitsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: benefitsRef });
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
       <AnimatedBackground color="orange" />
@@ -62,7 +91,7 @@ export default function DriverBehaviorPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={benefitsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Why Monitor Driver Behavior?</h2>
@@ -77,7 +106,7 @@ export default function DriverBehaviorPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-8 border-white/10 hover:border-orange-500/30 transition-colors group"
+                className="benefit-card glass-card rounded-3xl p-8 border-white/10 hover:border-orange-500/30 transition-colors group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-orange-900/30 flex items-center justify-center mb-6 border border-orange-500/20 group-hover:bg-orange-500/20 transition-colors">
                   <benefit.icon className="w-7 h-7 text-orange-400 group-hover:text-orange-300 transition-colors" />
@@ -131,7 +160,8 @@ export default function DriverBehaviorPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-orange-900/10" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">

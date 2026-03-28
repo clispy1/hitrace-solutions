@@ -1,15 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   MapPin, Box, Truck, Route, AlertTriangle, 
   BarChart, Smartphone, Settings, Cloud, Eye, 
   CheckCircle2, ArrowRight, Crosshair 
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const whatWeTrack = [
   { icon: Truck, title: "Vehicle Tracking", desc: "Live location, speed, route history, fuel usage, and driver behavior analytics.", image: "https://picsum.photos/seed/vehicle-track/600/400" },
@@ -50,6 +59,43 @@ const benefits = [
 ];
 
 export default function TrackingSolutionsPage() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const trackCards = gsap.utils.toArray('.track-card');
+    gsap.fromTo(trackCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: trackRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    const featureCards = gsap.utils.toArray('.feature-card');
+    gsap.fromTo(featureCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: trackRef });
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
       <AnimatedBackground color="blue" />
@@ -94,7 +140,7 @@ export default function TrackingSolutionsPage() {
       </section>
 
       {/* What We Track */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={trackRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What We Track</h2>
@@ -109,7 +155,7 @@ export default function TrackingSolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl overflow-hidden border-white/10 text-center group hover:border-blue-500/30 transition-colors flex flex-col"
+                className="track-card glass-card rounded-3xl overflow-hidden border-white/10 text-center group hover:border-blue-500/30 transition-colors flex flex-col"
               >
                 <div className="h-48 w-full relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -134,7 +180,7 @@ export default function TrackingSolutionsPage() {
       </section>
 
       {/* Key Features */}
-      <section className="py-24 relative z-10 bg-slate-900/30">
+      <section className="py-24 relative z-10 bg-slate-900/30" ref={featuresRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Key Features</h2>
@@ -148,7 +194,7 @@ export default function TrackingSolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass rounded-2xl p-6 border border-white/5 flex gap-4 items-start hover:bg-white/5 transition-colors"
+                className="feature-card glass rounded-2xl p-6 border border-white/5 flex gap-4 items-start hover:bg-white/5 transition-colors"
               >
                 <div className="w-10 h-10 rounded-lg bg-blue-900/50 flex items-center justify-center flex-shrink-0">
                   <feature.icon className="w-5 h-5 text-blue-400" />
@@ -253,8 +299,9 @@ export default function TrackingSolutionsPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-blue-900/20" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/30 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div

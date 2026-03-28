@@ -6,6 +6,7 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   Monitor, Smartphone, FileText, Package, Globe, 
   CheckCircle2, TrendingUp, Rocket, Headphones, Code, ShieldCheck,
@@ -256,8 +257,9 @@ export default function WhiteLabelPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-blue-900/20" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/30 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div

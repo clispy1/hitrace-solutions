@@ -1,15 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MagneticEffect } from '@/components/magnetic-effect';
 import { AnimatedBackground } from '@/components/animated-background';
+import { Cta3DBackground } from '@/components/cta-3d';
 import { 
   Fuel, ShieldCheck, TrendingUp, Activity, 
   Map, Clock, Database, CheckCircle2, 
   ArrowRight, Droplet, Cpu, Car 
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const reasons = [
   { icon: ShieldCheck, title: "Safeguard Fuel Against Theft", desc: "Fleet managers have valid concerns regarding fuel theft. Implement fuel monitoring systems to identify irregularities and safeguard your assets." },
@@ -31,6 +40,43 @@ const components = [
 ];
 
 export default function FuelMonitoringPage() {
+  const reasonsRef = useRef<HTMLDivElement>(null);
+  const componentsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const reasonCards = gsap.utils.toArray('.reason-card');
+    gsap.fromTo(reasonCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: reasonsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+
+    const componentCards = gsap.utils.toArray('.component-card');
+    gsap.fromTo(componentCards, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: componentsRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: reasonsRef });
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 overflow-hidden relative">
       <AnimatedBackground color="green" />
@@ -70,7 +116,7 @@ export default function FuelMonitoringPage() {
       </section>
 
       {/* Reasons to Utilize */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={reasonsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Reasons to Utilize Fuel Monitoring</h2>
@@ -85,7 +131,7 @@ export default function FuelMonitoringPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-8 border-white/10 hover:border-green-500/30 transition-colors group"
+                className="reason-card glass-card rounded-3xl p-8 border-white/10 hover:border-green-500/30 transition-colors group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-green-900/30 flex items-center justify-center mb-6 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
                   <reason.icon className="w-7 h-7 text-green-400 group-hover:text-green-300 transition-colors" />
@@ -152,7 +198,7 @@ export default function FuelMonitoringPage() {
       </section>
 
       {/* Components */}
-      <section className="py-24 relative z-10">
+      <section className="py-24 relative z-10" ref={componentsRef}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Fuel Monitoring System Components</h2>
@@ -167,7 +213,7 @@ export default function FuelMonitoringPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-colors"
+                className="component-card glass rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-colors"
               >
                 <comp.icon className="w-10 h-10 text-slate-300 mb-6" />
                 <h3 className="text-xl font-display font-bold mb-3 text-white">{comp.title}</h3>
@@ -180,7 +226,8 @@ export default function FuelMonitoringPage() {
 
       {/* CTA Section */}
       <section className="py-24 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-green-900/10" />
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <Cta3DBackground />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">

@@ -43,6 +43,7 @@ const menuItems = [
       { name: 'Blog', href: '#blog' },
       { name: 'Case Studies', href: '#case-studies' },
       { name: 'FAQs', href: '#faqs' },
+      { name: 'Technical Support', href: '/technical-support' },
     ]
   },
 ];
