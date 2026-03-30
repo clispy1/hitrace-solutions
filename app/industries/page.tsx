@@ -195,7 +195,7 @@ export default function IndustriesPage() {
           >
             <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">Ready to Optimize Your Industry?</h2>
             <p className="text-xl text-blue-200 mb-10">
-              Let's discuss how our tailored solutions can improve your efficiency, safety, and bottom line.
+              Let&apos;s discuss how our tailored solutions can improve your efficiency, safety, and bottom line.
             </p>
             <MagneticEffect>
               <button className="inline-flex items-center gap-2 px-8 py-4 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-full text-lg font-bold transition-colors shadow-[0_0_30px_-5px_rgba(251,191,36,0.4)]">

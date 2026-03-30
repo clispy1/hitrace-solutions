@@ -139,7 +139,7 @@ export default function TechnicalSupportPage() {
               <LifeBuoy className="w-4 h-4" /> 24/7 Assistance
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
-              We're Here to <br className="hidden md:block" />
+              We&apos;re Here to <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Help You Succeed.</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
@@ -154,7 +154,7 @@ export default function TechnicalSupportPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Contact Support</h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Choose the channel that works best for you. We're available around the clock.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Choose the channel that works best for you. We&apos;re available around the clock.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">

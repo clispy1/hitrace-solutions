@@ -69,7 +69,7 @@ export function WhyChooseUs() {
             <div className="absolute bottom-8 left-8 right-8">
               <div className="glass p-6 rounded-2xl border border-white/10 backdrop-blur-md">
                 <p className="text-lg font-medium text-white italic">
-                  "Hitrace has completely transformed how we manage our operations. The ROI was visible within the first month."
+                  &quot;Hitrace has completely transformed how we manage our operations. The ROI was visible within the first month.&quot;
                 </p>
                 <div className="mt-4 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center text-slate-900 font-bold">

@@ -6,6 +6,7 @@ import { MagneticEffect } from './magnetic-effect';
 
 const menuItems = [
   { name: 'Home', href: '/' },
+  { name: 'About Us', href: '/about' },
   {
     name: 'Services',
     href: '#services',
@@ -40,9 +41,9 @@ const menuItems = [
     name: 'Resources',
     href: '#resources',
     subItems: [
-      { name: 'Blog', href: '#blog' },
-      { name: 'Case Studies', href: '#case-studies' },
-      { name: 'FAQs', href: '#faqs' },
+      { name: 'Blog', href: '/blog' },
+      { name: 'Case Studies', href: '/case-studies' },
+      { name: 'FAQs', href: '/faq' },
       { name: 'Technical Support', href: '/technical-support' },
     ]
   },

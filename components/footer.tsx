@@ -12,18 +12,22 @@ export function Footer() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative rounded-[3rem] overflow-hidden bg-blue-700 p-12 md:p-20 text-center shadow-2xl shadow-blue-900/50"
+          className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-12 md:p-20 text-center shadow-2xl border border-white/10"
         >
-          <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/pattern/1000/1000')] opacity-10 mix-blend-overlay" />
+          {/* Atmospheric background elements */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/30 blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/pattern/1000/1000')] opacity-5 mix-blend-overlay" />
+          
           <div className="relative z-10 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
               Interested in a tracker installation?
             </h2>
-            <p className="text-xl text-blue-100 mb-10 font-medium">
+            <p className="text-xl text-blue-200 mb-10 font-medium">
               Talk to us today and let&apos;s optimize your business processes.
             </p>
             <MagneticEffect className="inline-block">
-              <button className="px-10 py-5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-full transition-all flex items-center justify-center gap-2 mx-auto group text-lg shadow-2xl shadow-amber-400/20">
+              <button className="px-10 py-5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-full transition-all flex items-center justify-center gap-2 mx-auto group text-lg shadow-[0_0_30px_-5px_rgba(251,191,36,0.4)]">
                 Request a Free Consultation
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -60,8 +64,8 @@ export function Footer() {
             <ul className="space-y-4">
               {[
                 { name: 'Home', href: '/' },
-                { name: 'About Us', href: '#about' },
-                { name: 'Blog', href: '#blog' },
+                { name: 'About Us', href: '/about' },
+                { name: 'Blog', href: '/blog' },
                 { name: 'Technical Support', href: '/technical-support' },
                 { name: 'Book a Demo', href: '#demo' }
               ].map((link) => (
